@@ -1,0 +1,102 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{fullpage}
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\setlength{\parindent}{0pt} 
+\newcommand{\myspace}{0.4cm}
+\pagestyle{empty}
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\DeclareMathOperator\erf{erf}
+
+\begin{document}
+
+\begin{center}
+
+\large
+\begin{tabular}{L{0.3\linewidth} C{0.3\linewidth} R{0.3\linewidth}}
+\hline
+Assignment 8	&MTH 351 -- Section 010		&Spring 2014 \\
+\hline
+\end{tabular}
+
+\vspace{\myspace}
+
+{\bf Due Friday, June 6 by the end of class.}
+\end{center}
+
+{\bf Notes:} 
+\begin{itemize}
+\itemsep0em 
+\item The program {\tt comp\_trap.m} should be used as the basis for implementing composite Simpson's rule in Question 1.
+\item The code {\tt romberg.m} implements Romberg's method.
+\item The script {\tt a8q2.m} has definitions for the functions and quantities needed to do Question 2.
+\end{itemize}
+
+\begin{enumerate}
+
+%%%QUESTION 1
+\item {\bf [12 points]} We will use composite Simpson's rule to do an example similar to the one done in class with the composite trapezoid rule. 
+
+\begin{enumerate} 
+\itemsep1em
+\item Modify the file {\tt comp\_trap.m} to implement the composite Simpson's rule. {\bf Please include a printout of your code.} It should not be more than a few lines.
+
+Hint: The syntax {\tt x(1:2:end)} in Matlab will give you the 1st, 3rd, 5th, etc. elements of the vector {\tt x}, and {\tt x(2:2:end)} will give you elements 2, 4, 6, etc. Remember that Matlab's indexing convention starts at 1, so the point $x_0$ in the notation used in class will be {\tt x(1)} in Matlab, and so on.
+
+A suggested test case to see if you have implemented Simpson's rule properly: apply it to the function $x^3 + x^2 + x + 1$ using the points {\tt x = 1:0.1:2}. Since Simpson's rule is exact for polynomials of degree 3, it should give the exact answer of $\frac{103}{12} \approx 8.58333$
+
+\item Apply your code from part (a) to the following integral:
+\begin{equation*}
+\int_1^9 \ln x \: dx
+\end{equation*}
+using a spacing of $h = 1$. (Note: the command for natural log in Matlab is {\tt log}). How close is the result to the true value of the integral? (Recall that $\displaystyle \int \ln x \: dx = x \ln x - x + c$.)
+
+\item Derive an upper bound on the error in the approximation,
+\begin{equation*}
+E^S_n (f) = \frac{-(b-a)h^4}{180} f^{(4)}(\xi), \: \: \: \xi \in (a,b).
+\end{equation*}
+Roughly how much larger is it than the true error found in part (b)? (Hint: in this case it is a very conservative bound).
+
+\item Compute the asymptotic error bound,
+\begin{equation*}
+\widetilde{E^S_n}(f) = \frac{-h^4}{180} \left( f^{(3)}(b) - f^{(3)}(a) \right).
+\end{equation*}
+How does it compare to the true error?
+
+\end{enumerate}
+\newpage
+%%%QUESTION 2
+\item {\bf [8 points]} In this problem we will apply the composite trapezoid rule and Romberg's method to three different integrals:
+
+\begin{tabular}{p{0.4\linewidth}p{0.4\linewidth}}
+Integral							&Exact value \\
+\hline
+\\	
+(i) $\displaystyle \int_0^\pi e^{x} \sin(x) \: dx $				&$ \displaystyle \frac{1}{2} (1 +  \exp(\pi))$\\[12pt] 		
+(ii) $\displaystyle \int_{-2}^2\frac{1}{2-\cos(\pi x)} \: dx$			&$\displaystyle \frac{4\sqrt{3}}{3}$ \\[12pt]
+(iii) $\displaystyle \int_{-1}^1 \sqrt{1-|x|} \: dx$ 		&$ \displaystyle \frac{4}{3}$  
+\end{tabular}
+
+Pictures of each integrand are provided below. The function {\tt a8q2.m} contains implementations of the three integrands and the exact values.
+
+%\begin{tabular}{ccc}
+%$\displaystyle e^{x} \sin(x)$		&$\displaystyle \frac{1}{2-\cos(\pi x)}$		&$\displaystyle \sqrt{1-|x|}$ \\
+%\includegraphics[width=0.3\linewidth]{f1.eps}			&\includegraphics[width=0.3\linewidth]{f2.eps}				&\includegraphics[width=0.3\linewidth]{f3.eps}
+%\end{tabular}
+
+\begin{enumerate}
+\item Run {\tt romberg.m} for each of the three cases, with $n=6$. Then, the last element in the {\bf first} column of the table computed by the method is the composite trapezoid rule with 32 subintervals, and the last element in the {\bf last} column is the final value computed by Romberg's method. For each of the three integrals, compute the error in these two approximations (true value minus the approximation), and present the results in a table.
+
+\item Comment on the performance of Romberg's method versus the composite trapezoid rule for each of the three cases above. Does it provide a significant improvement on the composite trapezoid rule approximation? If not, then explain why the performance of the method was less than ideal.
+\end{enumerate}
+\end{enumerate}
+
+
+\end{document}
+

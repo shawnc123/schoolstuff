@@ -1,0 +1,74 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{fullpage}
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\setlength{\parindent}{0pt} 
+\newcommand{\myspace}{0.4cm}
+\pagestyle{empty}
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\DeclareMathOperator\erf{erf}
+
+\begin{document}
+
+\begin{center}
+
+\large
+\begin{tabular}{L{0.3\linewidth} C{0.3\linewidth} R{0.3\linewidth}}
+\hline
+Assignment 5	&MTH 351 -- Section 010		&Spring 2014 \\
+\hline
+\end{tabular}
+
+\vspace{\myspace}
+
+{\bf Due Wednesday, May 14 by the end of class.}
+\end{center}
+
+\begin{enumerate}
+
+%%%QUESTION 1
+\item {\bf [12 points]} Consider finding a root of the function $f(x) =x^2 - 2xe^{-x} + e^{-2x}$. 
+\begin{enumerate} 
+\item Plot the function in Matlab on the interval $[0,2]$. Based on the plot, what can you conclude about the multiplicity of the root?
+\item Run {\tt newtons.m} on this function for 20 iterations, starting from $x_0=1$. What rate of convergence do you observe? Based on the results, what is the multiplicity, $m$, of the root? Explain.
+\item Edit {\tt newtons.m} to implement the Modified Newton's method seen at the end of lecture from Monday, April 28. Run your modified code on this problem with the same starting point, and give the value of the root to 6 decimal places. Is the convergence quadratic? Explain.
+\end{enumerate}
+
+{\bf Please include:} A copy of your plot from part (a) and a printout of your modified code for part (c), as well as your written response.
+
+\medskip
+
+%%%Question 2
+\item {\bf [8 points]} Newton's method gives us the following fixed point iteration to find $\sqrt{a}$:
+\begin{equation*}
+x_{n+1} = \frac{1}{2} \left( x_n + \frac{a}{x_n} \right).
+\end{equation*}
+A second fixed point iteration that one can use is given by:
+\begin{equation*}
+x_{n+1} = \frac{x_n (x_n^2 + 3a)}{3x_n^2 + a}
+\end{equation*}.
+\begin{enumerate}
+\item Show that $\sqrt{a}$ is a fixed point of both iterations.
+
+\item Try running the second iteration in Matlab with $a=12$, starting from $x_0 = 1$. Use {\tt format long} so you can see all the digits. How many iterations are required until it converges to all digits? Is it more or less than Newton's method?
+
+\item Show that the second iteration has cubic rate of convergence. Hint: The function $g(x)$ and its first few derivatives are given by
+\begin{align*}
+g(x) &=  \frac{x (x^2 + 3a)}{3x^2 + a}\\
+g'(x) &= \frac{3(a-x^2)^2}{(3x^2+a)^2}\\
+g''(x) &= \frac{-48ax(a-x^2)}{(3x^2+a)^3} \\
+g'''(x) &= \frac{-48a(9x^4-18ax^2+a^2)}{(3x^2+a)^4}
+\end{align*}
+
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}
+
